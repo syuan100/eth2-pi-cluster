@@ -161,7 +161,7 @@ For ease, we will be leveraging the [Eth2 Launchpad](https://medalla.launchpad.e
 
 Once you've successfully followed all the instructions from the launchpad, you should end up with a directory called `validator_keys` that contains all the information and files you'll need to load into your validator.
 
-Copy the contents of `validator_keys` into **ONLY ONE** of the client folders under `eth2_launchpad_files` in this directory. For example, if you are using the Lighthouse validator, copy the contents into `eth2_launchpad_files/lighthouse/validator_keys`.
+Copy the contents of `validator_keys` into **ONLY ONE** of the client folders under `eth2_launchpad_files`. For example, if you are using the Lighthouse validator, copy the contents into `eth2_launchpad_files/lighthouse/validator_keys`.
 
 **IT IS IMPERATIVE THAT YOU ONLY HAVE ONE COPY OF THE VALIDATOR KEYS IN ONE CLIENT FOLDER. HAVING THE SAME VALIDATOR KEYS IN MULTIPLE CLIENTS WILL CAUSE YOUR DEPOSIT TO BE SLASHED AND YOU WILL LOSE ETHER.**
 
