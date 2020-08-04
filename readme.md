@@ -139,7 +139,7 @@ Once you've properly connected everyting and the Raspberry Pis have completed bo
 
 ## Ansible playbook setup
 
-- Edit the `hosts.ini` file. You will need an IP for one main "master" Pi node and the rest will be "worker" node Pis
+- In the repository, edit the `hosts.ini` file. You will need an IP for one main "master" Pi node and the rest will be "worker" node Pis
 
   ```
   [master]
