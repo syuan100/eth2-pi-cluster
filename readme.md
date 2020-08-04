@@ -173,7 +173,7 @@ While at the root level of the repository, run this command:
 
 You will see the playbook run and you can monitor each step as it completes. The playbook end to end takes about 10 minutes to run.
 
-If you are running into errors, you can run the above command with the `-v`, `-vv`, or `-vvv` command to see more details about each step as it runs.
+If you are running into errors, you can run the above command with the `-v`, `-vv`, or `-vvv` flag to see more details about each step as it runs.
 
 If you've deployed successfully, SSH into your master node and run this command:
 
