@@ -9,5 +9,5 @@
         dest: /mnt/eth2/.lighthouse
       when: deploy_lighthouse_validator == true
     - name: Restart lighthouse validator
-      shell: kubectl rollout restart deployment/lighthouse-validator
+      shell: kubectl rollout restart deployment/lighthouse-validator && kubectl delete pods -l app=lighthouse-validator
       when: deploy_lighthouse_validator == true
