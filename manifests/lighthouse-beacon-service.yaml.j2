@@ -5,15 +5,15 @@ metadata:
 spec:
   type: LoadBalancer
   selector:
-    app: lighhouse-beacon
+    app: lighthouse-beacon
   ports:
-  - name: 5052-tcp
+  - name: lighthouse-beacon-api
     port: {{ lighthouse_beacon_api_port }}
     targetPort: {{ lighthouse_beacon_api_port_target }}
-  - name: 5053-tcp
+  - name: lighthouse-beacon-wss
     port: {{ lighthouse_beacon_wss_port }}
     targetPort: {{ lighthouse_beacon_wss_port_target }}
-  - name: 9000-tcp
+  - name: lighthouse-beacon-port
     port: {{ lighthouse_beacon_port }}
     targetPort: {{ lighthouse_beacon_port_target }}
 
@@ -26,9 +26,9 @@ metadata:
 spec:
   type: LoadBalancer
   selector:
-    app: lighhouse-beacon
+    app: lighthouse-beacon
   ports:
-  - name: 9000-udp
+  - name: lighthouse-beacon-port-udp
     protocol: UDP
     port: {{ lighthouse_beacon_port }}
     targetPort: {{ lighthouse_beacon_port_target }}
@@ -69,7 +69,7 @@ spec:
             - containerPort: {{ lighthouse_beacon_port }}
               protocol: UDP
           command: ["lighthouse"]
-          args: ["beacon", "--eth1", "--http", "--http-address", "0.0.0.0", "--http-allow-origin", "*", "--network-dir", "/root/.lighthouse/network", "--ws", "--ws-address", "0.0.0.0", "--eth1-endpoint", "{{ eth1_endpoint }}" ]
+          args: ["beacon", "--http", "--http-address", "0.0.0.0", "--http-allow-origin", "\"*\"", "--network-dir", "/root/.lighthouse/network", "--ws", "--ws-address", "0.0.0.0", "--debug-level", "debug" ]
           volumeMounts:
             - mountPath: "/root"
               name: eth2pv

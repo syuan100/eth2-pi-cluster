@@ -205,10 +205,10 @@ pod/lighthouse-beacon-59b7c579ff-n7bwr      1/1     Running   0          3h25m  
 
 NAME                            TYPE           CLUSTER-IP      EXTERNAL-IP      PORT(S)                                        AGE     SELECTOR
 service/kubernetes              ClusterIP      10.43.0.1       <none>           443/TCP                                        7d7h    <none>
-service/lighthouse-beacon       LoadBalancer   10.43.205.225   192.168.xx.xxx   5052:30452/TCP,5053:32564/TCP,9000:30583/TCP   4h9m    app=lighhouse-beacon
+service/lighthouse-beacon       LoadBalancer   10.43.205.225   192.168.xx.xxx   5052:30452/TCP,5053:32564/TCP,9000:30583/TCP   4h9m    app=lighthouse-beacon
 service/geth                    LoadBalancer   10.43.40.149    192.168.xx.xxx   8545:31424/TCP,30303:30263/TCP                 4h9m    app=geth
 service/geth-udp                LoadBalancer   10.43.88.38     192.168.xx.xxx   30303:30831/UDP                                3h58m   app=geth
-service/lighthouse-beacon-udp   LoadBalancer   10.43.133.3     <pending>        9000:31752/UDP                                 3h58m   app=lighhouse-beacon
+service/lighthouse-beacon-udp   LoadBalancer   10.43.133.3     <pending>        9000:31752/UDP                                 3h58m   app=lighthouse-beacon
 
 NAME                                         DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE     CONTAINERS                               IMAGES                                                                          SELECTOR
 daemonset.apps/svclb-geth-udp                4         4         4       4            4           <none>          3h58m   lb-port-30303                            rancher/klipper-lb:v0.1.2                                                       app=svclb-geth-udp
