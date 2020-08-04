@@ -1,0 +1,7 @@
+- name: Copy lighthouse beacon service config
+  template:
+    src: ../manifests/lighthouse-beacon-service.yaml.j2
+    dest: /var/lib/rancher/k3s/server/manifests/lighthouse-beacon-service.yaml
+    owner: root
+    group: root
+    mode: preserve

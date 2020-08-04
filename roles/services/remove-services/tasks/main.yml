@@ -1,0 +1,29 @@
+- name: Delete geth service config file
+  file:
+    path: /var/lib/rancher/k3s/server/manifests/geth-service.yaml
+    state: absent
+  when: external_eth1 == true
+
+- name: Delete geth deployment
+  shell: kubectl delete deployment --selector=app=geth
+  when: external_eth1 == true
+
+- name: Delete lighthouse-beacon service config file
+  file:
+    path: /var/lib/rancher/k3s/server/manifests/lighthouse-beacon-service.yaml
+    state: absent
+  when: deploy_lighthouse_beacon == false
+
+- name: Delete lighthouse-beacon deployment
+  shell: kubectl delete deployment --selector=app=lighthouse-beacon
+  when: deploy_lighthouse_beacon == false
+
+- name: Delete lighthouse-validator service config file
+  file:
+    path: /var/lib/rancher/k3s/server/manifests/lighthouse-validator-service.yaml
+    state: absent
+  when: deploy_lighthouse_validator == false
+
+- name: Delete lighthouse-validator deployment
+  shell: kubectl delete deployment --selector=app=lighthouse-validator
+  when: deploy_lighthouse_validator == false

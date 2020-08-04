@@ -1,0 +1,12 @@
+- name: Redeploy all kubernetes services
+  hosts: master
+  become: yes
+  roles:
+    - role: services/remove-services
+    - { role: services/glusterfs, when: storage_solution == "glusterfs" }
+    - { role: services/geth, when: external_eth1 != true }
+    - { role: services/lighthouse-beacon, when: deploy_lighthouse_beacon == true }
+    - { role: services/lighthouse-validator, when: deploy_lighthouse_validator == true }
+  tasks:
+    - name: Redeploy services
+      shell: kubectl rollout restart deployments

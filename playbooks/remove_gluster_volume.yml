@@ -1,0 +1,39 @@
+
+- name: Remove old volumes
+  hosts: master
+  become: yes
+  tasks:
+    - name: Stop the volume
+      shell: gluster --mode=script volume stop eth2vol
+      ignore_errors: yes
+    - name: Delete the volume
+      shell: gluster --mode=script volume delete eth2vol
+      ignore_errors: yes
+
+- name: Reset mount paths and volume groups
+  hosts: gluster_servers
+  become: yes
+  vars:
+    gluster_cluster_hosts: "{{ groups['gluster_servers'] }}"
+    gluster_infra_reset_mnt_paths: /mnt/brick1
+    gluster_infra_reset_volume_groups: vg_sda1
+  roles:
+    - role: './gluster_infra/roles/backend_reset'
+  tasks:
+    - name: Unmount volume
+      shell: umount -l /mnt/eth2
+      ignore_errors: true
+    - name: Remove volume contents
+      shell: rm -r /mnt/eth2
+      ignore_errors: true
+    - name: Remove volume mount path
+      shell: rmdir /mnt/eth2
+      ignore_errors: true
+    - name: Stop glusterd
+      shell: service glusterd stop
+    - name: Unmount brick
+      mount:
+        path: /mnt/brick1
+        state: unmounted
+    - name: Remove brick mount path
+      shell: rm -rf /mnt/brick1

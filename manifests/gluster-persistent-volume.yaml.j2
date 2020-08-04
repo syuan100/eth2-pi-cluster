@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: eth2pv
+spec:
+  capacity:
+    storage: {{ storage_size }}Gi
+  accessModes:
+    - ReadWriteOnce
+  glusterfs:
+    endpoints: gluster-cluster
+    path: /eth2vol
+    readOnly: false
+  persistenVolumeReclaimPolicy: Retain
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: eth2claim
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: {{ storage_size }}Gi

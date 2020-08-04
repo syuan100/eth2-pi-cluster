@@ -1,0 +1,7 @@
+- name: Copy lighthouse validator service config
+  template:
+    src: ../manifests/lighthouse-validator-service.yaml.j2
+    dest: /var/lib/rancher/k3s/server/manifests/lighthouse-validator-service.yaml
+    owner: root
+    group: root
+    mode: preserve
