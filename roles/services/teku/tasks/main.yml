@@ -1,0 +1,23 @@
+- name: Copy teku manifest file (beacon + validator)
+  template:
+    src: ../manifests/teku-service.yaml.j2
+    dest: /var/lib/rancher/k3s/server/manifests/teku-service.yaml
+    owner: root
+    group: root
+    mode: preserve
+
+- name: Copy teku keystore files (copy over directory)
+
+- name: Copy teku keystore password files (iterate over num of keystores)
+
+- name: Register teku keystore filenames (output is list format)
+
+- name: Register teku keystore password files (output is list format)
+
+- name: Copy teku service config file (pass in registered variables from above)
+  template:
+    src: ../manifests/teku-config.yml.j2
+    dest: /mnt/eth2/teku/teku-config.yml
+    owner: root
+    group: root
+    mode: preserve

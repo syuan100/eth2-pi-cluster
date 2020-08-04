@@ -9,4 +9,4 @@
     - { role: services/lighthouse-validator, when: deploy_lighthouse_validator == true }
   tasks:
     - name: Redeploy services
-      shell: kubectl rollout restart deployments
+      shell: kubectl rollout restart deployments && kubectl delete pods --all
