@@ -1,6 +1,6 @@
 # Redundant Eth 2.0 Staking on a Raspberry Pi Cluster
 
-The purpose of project is to provide a (relatively) easy way to deploy a fault-tolerant Eth 2.0 staking Kubernetes cluster on Raspberry Pi 4's using Ansible. Familiarity with Kubernetes, or at least a willingness to learn, is recommended so that you can use the `kubectl` commands to troubleshoot your deployments if anything goes sideways.
+The purpose of this project is to provide a (relatively) easy way to deploy a fault-tolerant Eth 2.0 staking Kubernetes cluster on Raspberry Pi 4's using Ansible. Familiarity with Kubernetes, or at least a willingness to learn, is recommended so that you can use the `kubectl` commands to troubleshoot your deployments if anything goes sideways.
 
 #### So who exactly is this for...
 - People who want to create a cost effective, yet redudant, staking setup
