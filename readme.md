@@ -4,7 +4,7 @@ The purpose of this project is to provide a (relatively) easy way to deploy a fa
 
 #### What does this project contain?
 - Full hardware setup instructions for a Raspberry Pi cluster
-- Single-line deployment for a self-healing deployment of geth, beacon, and validator nodes
+- Single-line command for a self-healing deployment of geth, beacon, and validator nodes
 - A single variables file `group_vars/all.yml` that controls your deployment
 - Additional playbooks to update your deployment
 
@@ -139,7 +139,7 @@ Once you've properly connected everyting and the Raspberry Pis have completed bo
 
 ## Ansible playbook setup
 
-- Edit the `hosts.ini` file. You will need an IP for one main "master" Pi node and the rest will be "worker" node Pis
+- In the repository, edit the `hosts.ini` file. You will need an IP for one main "master" Pi node and the rest will be "worker" node Pis
 
   ```
   [master]
@@ -157,11 +157,11 @@ Once you've properly connected everyting and the Raspberry Pis have completed bo
 
 ## Generate your validator keys
 
-For ease, we will be leveraging the (Eth2 Launchpad)[https://medalla.launchpad.ethereum.org/] to generate our validator keys and submit our deposits.
+For ease, we will be leveraging the [Eth2 Launchpad](https://medalla.launchpad.ethereum.org/) to generate our validator keys and submit our deposits.
 
 Once you've successfully followed all the instructions from the launchpad, you should end up with a directory called `validator_keys` that contains all the information and files you'll need to load into your validator.
 
-Copy the contents of `validator_keys` into **ONLY ONE** of the client folders under `eth2_launchpad_files` in this directory. For example, if you are using the Lighthouse validator, copy the contents into `eth2_launchpad_files/lighthouse/validator_keys`.
+Copy the contents of `validator_keys` into **ONLY ONE** of the client folders under `eth2_launchpad_files`. For example, if you are using the Lighthouse validator, copy the contents into `eth2_launchpad_files/lighthouse/validator_keys`.
 
 **IT IS IMPERATIVE THAT YOU ONLY HAVE ONE COPY OF THE VALIDATOR KEYS IN ONE CLIENT FOLDER. HAVING THE SAME VALIDATOR KEYS IN MULTIPLE CLIENTS WILL CAUSE YOUR DEPOSIT TO BE SLASHED AND YOU WILL LOSE ETHER.**
 
@@ -173,7 +173,7 @@ While at the root level of the repository, run this command:
 
 You will see the playbook run and you can monitor each step as it completes. The playbook end to end takes about 10 minutes to run.
 
-If you are running into errors, you can run the above command with the `-v`, `-vv`, or `-vvv` command to see more details about each step as it runs.
+If you are running into errors, you can run the above command with the `-v`, `-vv`, or `-vvv` flag to see more details about each step as it runs.
 
 If you've deployed successfully, SSH into your master node and run this command:
 
