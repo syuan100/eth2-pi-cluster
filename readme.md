@@ -157,7 +157,7 @@ Once you've properly connected everyting and the Raspberry Pis have completed bo
 
 ## Generate your validator keys
 
-For ease, we will be leveraging the (Eth2 Launchpad)[https://medalla.launchpad.ethereum.org/] to generate our validator keys and submit our deposits.
+For ease, we will be leveraging the [Eth2 Launchpad](https://medalla.launchpad.ethereum.org/) to generate our validator keys and submit our deposits.
 
 Once you've successfully followed all the instructions from the launchpad, you should end up with a directory called `validator_keys` that contains all the information and files you'll need to load into your validator.
 
