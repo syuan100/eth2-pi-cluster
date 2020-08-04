@@ -4,7 +4,7 @@ The purpose of this project is to provide a (relatively) easy way to deploy a fa
 
 #### What does this project contain?
 - Full hardware setup instructions for a Raspberry Pi cluster
-- Single-line deployment for a self-healing deployment of geth, beacon, and validator nodes
+- Single-line command for a self-healing deployment of geth, beacon, and validator nodes
 - A single variables file `group_vars/all.yml` that controls your deployment
 - Additional playbooks to update your deployment
 
