@@ -1,1 +1,2 @@
-./eth2_launchpad_files/lighthouse/validator_keys/*
+eth2_launchpad_files/*/validator_keys/*
+!eth2_launchpad_files/*/validator_keys/readme.md
