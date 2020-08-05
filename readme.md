@@ -11,10 +11,10 @@ The purpose of this project is to provide a (relatively) easy way to deploy a fa
 #### Work in progress
 - Adding additional clients
   - [x] Lighthouse
-  - [] Prysm
+  - [ ] Prysm
   - [x] Teku
-  - [] Nimbux
-  - [] Lodestar (?)
+  - [ ] Nimbux
+  - [ ] Lodestar (?)
 - Logging and monitoring
 - Including a setting for POAP [`graffiti`](https://beaconcha.in/poap)
 
