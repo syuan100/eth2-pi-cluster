@@ -93,7 +93,7 @@ You may want to setup IP reservations for each Pi so that you don't need to chec
 ### SSH setup
 1. From your host machine, open a terminal and type:
   
-  `ssh ubuntu@xxx.xxx.x.x` (replace the x's with the IP address of the Pi)
+   `ssh ubuntu@xxx.xxx.x.x` (replace the x's with the IP address of the Pi)
 
 2. The default password is `ubuntu`. Upon successfully logging in you will be prompted to update the password.
 
@@ -125,7 +125,7 @@ You may want to setup IP reservations for each Pi so that you don't need to chec
 1. Install [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible-on-ubuntu)
 2. Install a few dependencies for the Ansible modules we are using:
    
-   `pip install jmespath`
+   `pip install jmespath` or `apt-get install python-jmespath`
 
 ## Replicated storage setup
 *Note: Attaching a USB stick or SSD drive to your Raspberry Pi will be easier and more performant than partitioning a portion of your SD card.*
@@ -154,21 +154,24 @@ You may want to setup IP reservations for each Pi so that you don't need to chec
 
 ## Ansible playbook setup
 
-- In the repository, edit the `hosts.ini` file. You will need an IP for one main "master" Pi node and the rest will be "worker" node Pis
+- In the repository, remove the `.example` extension from these files:
+  - `hosts.ini.example`
+  - `group_vars/all.yml.example`
+- Edit the `hosts.ini` file: You will need an IP for one main "master" Pi node and the rest will be "worker" node Pis
 
   ```
   [master]
   ; Put the IP address for your main Kubernetes server
-  192.168.xx.xxx
+  xxx.xxx.xx.xxx
 
   [nodes]
   ; Put the IP addresses for the rest of the nodes
-  192.168.xx.xxx
-  192.168.xx.xxx
-  192.168.xx.xxx
+  xxx.xxx.xx.xxx
+  xxx.xxx.xx.xxx
+  xxx.xxx.xx.xxx
   ```
 
-- Edit the file in `group_vars/all.yml` to suit your needs. Head to the `group_vars` directory to see the README for more details
+- Edit the file in `group_vars/all.yml` to suit your needs. Head to the `group_vars` directory to see the README of all the details.
 
 ## Generate your validator keys
 
