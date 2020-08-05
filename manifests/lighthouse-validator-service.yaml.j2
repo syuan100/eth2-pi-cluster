@@ -30,7 +30,8 @@ spec:
             allowPrivilegeEscalation: false
           command: ["/bin/bash", "-c"]
           args:
-            - exec lighthouse validator --auto-register --server {{ lighthouse_beacon_endpoint }};
+            - echo -e "{{ lighthouse_keystore_password }}" | lighthouse account validator import --directory validator_keys && \
+              lighthouse validator --auto-register --server {{ lighthouse_beacon_endpoint }};
           volumeMounts:
             - mountPath: "/root"
               name: eth2pv

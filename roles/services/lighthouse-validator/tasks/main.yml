@@ -1,3 +1,8 @@
+- name: Copy lighthouse keys
+  file:
+    src: ../eth2_launchpad_files/lighthouse/validator_keys
+    dest: /mnt/eth2/.lighthouse
+
 - name: Copy lighthouse validator service config
   template:
     src: ../manifests/lighthouse-validator-service.yaml.j2

@@ -1,7 +1,7 @@
 - name: Redeploy all kubernetes services
   hosts: master
+  any_errors_fatal: true
   become: yes
-  gather_facts: no
   roles:
     - role: services/remove-services
     - { role: services/glusterfs, when: storage_solution == "glusterfs" }
