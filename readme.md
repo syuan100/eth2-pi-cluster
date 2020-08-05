@@ -94,6 +94,7 @@ You may want to setup IP reservations for each Pi so that you don't need to chec
 1. From your host machine, open a terminal and type:
   
   `ssh ubuntu@xxx.xxx.x.x` (replace the x's with the IP address of the Pi)
+
 2. The default password is `ubuntu`. Upon successfully logging in you will be prompted to update the password.
 
   *Note: You will only be using password login during this step. For the rest of the guide, we will setup SSH keys and disable password login to increase security.*
@@ -129,6 +130,7 @@ You may want to setup IP reservations for each Pi so that you don't need to chec
 *Note: Attaching a USB stick or SSD drive to your Raspberry Pi will be easier and more performant than partitioning a portion of your SD card.*
 
 1. Attach your SSD drive to the upper blue USB 3.0 port of each Pi
+
 2. `ssh` into your Pis and check what the device path is by running this command:
    
    `lsblk`
