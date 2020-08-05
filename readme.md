@@ -97,7 +97,7 @@ You may want to setup IP reservations for each Pi so that you don't need to chec
 
 2. The default password is `ubuntu`. Upon successfully logging in you will be prompted to update the password.
 
-  *Note: You will only be using password login during this step. For the rest of the guide, we will setup SSH keys and disable password login to increase security.*
+    *Note: You will only be using password login during this step. For the rest of the guide, we will setup SSH keys and disable password login to increase security.*
 
 3. Go back to your host machine and type this command to see if you have a set of SSH keys already:
    
