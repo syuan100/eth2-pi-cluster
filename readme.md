@@ -8,10 +8,17 @@ The purpose of this project is to provide a (relatively) easy way to deploy a fa
 - A single variables file `group_vars/all.yml` that controls your deployment
 - Additional playbooks to update your deployment
 
-#### Potential improvements
-- Adding additional clients (Prysm, Teku, Nimbus)
+#### Work in progress
+- Adding additional clients
+  - [x] Lighthouse
+  - [] Prysm
+  - [x] Teku
+  - [] Nimbux
+  - [] Lodestar (?)
 - Logging and monitoring
 - Including a setting for POAP [`graffiti`](https://beaconcha.in/poap)
+
+#### Potential improvements
 - Other distributed storage options other than GlusterFS
 - Triggering backup deployments to the cloud
 
