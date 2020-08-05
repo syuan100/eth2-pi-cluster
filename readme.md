@@ -118,6 +118,7 @@ You may want to setup IP reservations for each Pi so that you don't need to chec
    
    Once your keys are successfully copied, you should be able to login without using the password:
    - Test it out! `ssh ubuntu@xxx.xxx.x.x`
+   - When you are **SURE** you can login to each Pi using SSH without a password, move on to the next section.
 
 
 ## Ansible setup
