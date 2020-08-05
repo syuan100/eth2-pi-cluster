@@ -65,7 +65,7 @@ Please feel free to fork, make PRs, and open issues! This is all done completely
 
 ### Enable SSH
 - Once flashed, unplug and re-plug the microSD card back into your machine
-- Add an emtpy file named `ssh` on the `system-boot` partition
+- Add an emtpy file named `ssh` on the `system-boot` partition (Note: Some images may already have the file there upon flashing)
 
 You can now insert the microSD card into the Raspberry Pis.
 
