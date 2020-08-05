@@ -43,10 +43,6 @@
     patterns: "secret_*.txt"
   register: teku_keystore_secrets
 
-- set_fact:
-    teku_keystore_files_string: "{{ teku_keystore_remote.files | json_query('[].path') }}"
-    teku_keystore_secrets_string: "{{ teku_keystore_secrets.files | json_query('[].path') }}"
-
 - name: Copy teku config file
   template:
     src: ../manifests/teku-config.yml.j2
@@ -54,3 +50,6 @@
     owner: root
     group: root
     mode: preserve
+  vars:
+    teku_keystore_files_string: "{{ teku_keystore_remote.files | json_query('[].path') | map('basename') | list | map('regex_replace', '^', '/home/teku/validator_keys/') | list | join(',') }}"
+    teku_keystore_secrets_string: "{{ teku_keystore_secrets.files | json_query('[].path') | map('basename') | list | map('regex_replace', '^', '/home/teku/secrets/') | list | join(',') }}"

@@ -4,11 +4,11 @@
   gather_facts: no
   roles:
     - role: services/remove-services
-    # - { role: services/glusterfs, when: storage_solution == "glusterfs" }
-    # - { role: services/geth, when: external_eth1 != true }
-    # - { role: services/lighthouse-beacon, when: deploy_lighthouse_beacon == true }
-    # - { role: services/lighthouse-validator, when: deploy_lighthouse_validator == true }
+    - { role: services/glusterfs, when: storage_solution == "glusterfs" }
+    - { role: services/geth, when: external_eth1 != true }
+    - { role: services/lighthouse-beacon, when: deploy_lighthouse_beacon == true }
+    - { role: services/lighthouse-validator, when: deploy_lighthouse_validator == true }
     - { role: services/teku, when: deploy_teku_beacon_w_validator == true }
   tasks:
     - name: Redeploy services
-      shell: kubectl rollout restart deployments && kubectl delete pods --all
+      shell: kubectl rollout restart deployments

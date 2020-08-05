@@ -46,22 +46,22 @@
 
 - name: Create directory .kube
   file:
-    path: ~{{ target_user }}/.kube
+    path: ~{{ ansible_user }}/.kube
     state: directory
-    owner: "{{ target_user }}"
+    owner: "{{ ansible_user }}"
 
 - name: Copy config file to user home directory
   copy:
     src: /etc/rancher/k3s/k3s.yaml
-    dest: ~{{ target_user }}/.kube/config
+    dest: ~{{ ansible_user }}/.kube/config
     remote_src: yes
-    owner: "{{ target_user }}"
+    owner: "{{ ansible_user }}"
 
 - name: Replace https://localhost:6443 by https://master-pi:6443
   command: >-
     k3s kubectl config set-cluster default
       --server=https://{{ master_ip }}:6443
-      --kubeconfig ~{{ target_user }}/.kube/config
+      --kubeconfig ~{{ ansible_user }}/.kube/config
   changed_when: true
 
 - name: Create kubectl symlink

@@ -9,7 +9,7 @@
 
 | Variable | Type | Definition |
 |--|--|--|
-| `target_user` | `string` | Default user on Rapsberry Pis (will be `ubuntu` for Ubuntu OS) |
+| `ansible_user` | `string` | Default user on Rapsberry Pis (will be `ubuntu` for Ubuntu OS) |
 | `copy_local_key` | `string` | Path to local key on host machine (defaults to `$HOME/.ssh/id_rsa.pub`) |
 | `sys_packages` | `Array[] string` | List of default packages to install |
 

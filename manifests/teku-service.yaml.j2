@@ -49,8 +49,8 @@ spec:
           ports:
             - containerPort: {{ teku_api_port }}
             - containerPort: {{ teku_port }}
-          command: ["teku"]
-          args: [ "--config-file=/opt/teku/teku-config.yml" ]
+          command: ["/opt/teku/bin/teku"]
+          args: [ "--config-file=/home/teku/teku-config.yml", "--data-path", "/home/teku" ]
           volumeMounts:
-            - mountPath: "/opt"
+            - mountPath: "/home"
               name: eth2pv
