@@ -6,15 +6,11 @@ p2p-enabled: true
 p2p-port: 9000
 
 # validators
-validators-key-files: {{ teku_key_file_list }}
-validators-key-files-password-files: {{ teku_key_password_list }}
+validators-key-files: {{ teku_keystore_files_string }}
+validators-key-files-password-files: {{ teku_keystore_secrets_string }}
 
 # deposit
-eth1-endpoint: "http://localhost:8545"
-
-# metrics
-# metrics-enabled: true
-# metrics-categories: ["BEACON","LIBP2P","NETWORK"]
+eth1-endpoint: {{ eth1_endpoint }}
 
 # beacon rest api
 rest-api-port: 5051

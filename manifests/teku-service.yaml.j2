@@ -12,7 +12,7 @@ spec:
     targetPort: {{ teku_api_port_target }}
   - name: teku-p2p
     port: {{ teku_port }}
-    targetPort: {{ teku_target }}
+    targetPort: {{ teku_port_target }}
 
 ---
 
@@ -47,7 +47,7 @@ spec:
             - containerPort: {{ teku_api_port }}
             - containerPort: {{ teku_port }}
           command: ["teku"]
-          args: [ "--config-file=/opt/teku/teku-config.yml", "--validators-key-file=/opt/teku/validator_keys"]
+          args: [ "--config-file=/opt/teku/teku-config.yml" ]
           volumeMounts:
             - mountPath: "/opt"
               name: eth2pv

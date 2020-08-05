@@ -2,19 +2,52 @@
   template:
     src: ../manifests/teku-service.yaml.j2
     dest: /var/lib/rancher/k3s/server/manifests/teku-service.yaml
-    owner: root
-    group: root
-    mode: preserve
 
-- name: Copy teku keystore files (copy over directory)
+- name: Check for keystore files locally
+  find:
+    paths: "{{ lookup('env', 'PWD') }}/eth2_launchpad_files/teku/validator_keys"
+    patterns: "keystore*.json"
+  delegate_to: 127.0.0.1
+  register: teku_keystore_local
+  when: deploy_teku_beacon_w_validator == true
 
-- name: Copy teku keystore password files (iterate over num of keystores)
+- fail:
+    msg: "No compatible keystores found. Please use keystore keys generated from the Eth 2.0 Launchpad with the original file names and extensions."
+  when: teku_keystore_local.matched == 0
 
-- name: Register teku keystore filenames (output is list format)
+- name: Copy teku keystore files to master node
+  copy:
+    src: ../eth2_launchpad_files/teku/validator_keys
+    dest: /mnt/eth2/teku
+  when: teku_keystore_local.matched > 0
+  retries: 3
+  delay: 5
 
-- name: Register teku keystore password files (output is list format)
+- name: Create password files for each validator key
+  template:
+    src: ../manifests/teku-keystore-password.txt.j2
+    dest: /mnt/eth2/teku/secrets/secret_{{ item }}.txt
+  loop: "{{ range(1, +(teku_keystore_local.matched) + 1, 1)|list }}"
+  retries: 3
+  delay: 5
 
-- name: Copy teku service config file (pass in registered variables from above)
+- name: Register remote keystore filelist variable
+  find:
+    paths: /mnt/eth2/teku/validator_keys
+    patterns: "keystore*.json"
+  register: teku_keystore_remote
+
+- name: Register remote password filelist variable
+  find:
+    paths: /mnt/eth2/teku/secrets
+    patterns: "secret_*.txt"
+  register: teku_keystore_secrets
+
+- set_fact:
+    teku_keystore_files_string: "{{ teku_keystore_remote.files | json_query('[].path') }}"
+    teku_keystore_secrets_string: "{{ teku_keystore_secrets.files | json_query('[].path') }}"
+
+- name: Copy teku config file
   template:
     src: ../manifests/teku-config.yml.j2
     dest: /mnt/eth2/teku/teku-config.yml
