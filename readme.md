@@ -86,6 +86,8 @@ Check out the page below for tips on how to test your router security
 ### Write down the local IP address for each Pi
 Once you've properly connected everyting and the Raspberry Pis have completed booting, log into your router to see what each Pi's IP address is.
 
+You may want to setup IP reservations for each Pi so that you don't need to check everytime you reboot or unplug your Pi. Most routers support this through their UI, or [read this article for general instructions on how to do that](https://lifehacker.com/how-to-set-up-dhcp-reservations-and-never-check-an-ip-5822605).
+
 ✏️ Take note of each IP address, you will need it for the Ansible step later.
 
 ### SSH into each Pi and update the password
