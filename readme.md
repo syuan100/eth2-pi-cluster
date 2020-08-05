@@ -90,21 +90,14 @@ You may want to setup IP reservations for each Pi so that you don't need to chec
 
 ✏️ Take note of each IP address, you will need it for the Ansible step later.
 
-### SSH into each Pi and update the password
-- From your host machine, open a terminal and type:
+### SSH setup
+1. From your host machine, open a terminal and type:
   
   `ssh ubuntu@xxx.xxx.x.x` (replace the x's with the IP address of the Pi)
-- The default password is `ubuntu`. Upon successfully logging in you will be prompted to update the password.
+2. The default password is `ubuntu`. Upon successfully logging in you will be prompted to update the password.
 
-*Note: You will only be using password login during this step. For the rest of the guide, we will setup SSH keys and disable password login to increase security.*
-
-
-## Ansible host setup
-1. Install [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible-on-ubuntu)
-2. Install a few dependencies for the Ansible modules we are using:
-   
-   `pip install jmespath`
-3. Type this command to see if you have a set of SSH keys already:
+  *Note: You will only be using password login during this step. For the rest of the guide, we will setup SSH keys and disable password login to increase security.*
+3. Go back to your host machine and type this command to see if you have a set of SSH keys already:
    
    `ls -al ~/.ssh` 
    
@@ -121,6 +114,13 @@ You may want to setup IP reservations for each Pi so that you don't need to chec
    
    Once your keys are successfully copied, you should be able to login without using the password:
    - Test it out! `ssh ubuntu@xxx.xxx.x.x`
+
+
+## Ansible setup
+1. Install [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible-on-ubuntu)
+2. Install a few dependencies for the Ansible modules we are using:
+   
+   `pip install jmespath`
 
 ## Replicated storage setup
 *Note: Attaching a USB stick or SSD drive to your Raspberry Pi will be easier and more performant than partitioning a portion of your SD card.*
