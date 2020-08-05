@@ -97,17 +97,20 @@ You may want to setup IP reservations for each Pi so that you don't need to chec
 2. The default password is `ubuntu`. Upon successfully logging in you will be prompted to update the password.
 
   *Note: You will only be using password login during this step. For the rest of the guide, we will setup SSH keys and disable password login to increase security.*
+
 3. Go back to your host machine and type this command to see if you have a set of SSH keys already:
    
    `ls -al ~/.ssh` 
    
    If you see something like `id_rsa.pub` as one of the files then you can skip step 4.
+
 4. If you don't have an SSH key already for your host machine, generate an SSH key:
     
     `ssh-keygen`
     
     Follow the instructions. Note: This process will be faster if you don't use a passphrase.
     - If you DO use a passphrase on your key, follow the instructions [here](https://docs.ansible.com/ansible/latest/user_guide/connection_details.html#ssh-key-setup) for how to use `ssh-agent` to store your passphrase.
+
 5. Copy the SSH keys to your Raspberry Pis:
    
    `ssh-copy-id ubuntu@xxx.xxx.x.x`
