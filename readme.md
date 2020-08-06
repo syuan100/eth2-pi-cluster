@@ -63,6 +63,8 @@ Please feel free to fork, make PRs, and open issues! This is all done completely
 - Download Balena Etcher ([Link](https://www.balena.io/etcher/))
 - Open up Balena Etcher and follow the instructions to flash the Ubuntu image to your microSD card
 
+*Note: Please do not use Raspberry Pi Imager. For reasons unknown, using it caused me to be unable to properly SSH into the Raspberry Pi.*
+
 ### Enable SSH
 - Once flashed, unplug and re-plug the microSD card back into your machine
 - Add an emtpy file named `ssh` on the `system-boot` partition (Note: Some images may already have the file there upon flashing)
