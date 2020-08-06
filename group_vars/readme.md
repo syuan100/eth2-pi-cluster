@@ -36,6 +36,7 @@
 |--|--|--|
 | `geth_image_tag` | `string` | Valid container tag/path for geth |
 | `lighthouse_image_tag` | `string` | Valid container tag/path for lighthouse |
+| `teku_image_tag` | `string` | Valid container tag/path for teku | 
 
 *NOTE: Images must be built for arm64 architectures in order to deploy correctly*
 
@@ -61,3 +62,14 @@
 | `lighthouse_beacon_port` | `int` | General lighthouse beacon container port (Defaults to 9000) |
 | `lighthouse_beacon_target_port` | `int` | General lighthouse beacon service port (Defaults to 9000) |
 | `lighthouse_beacon_endpoint` | `string` | Eth 2.0 Beacon HTTP API endpoint (defaults to internal kubernetes hostname) |
+| `lighthouse_keystore_password` | `string` | Password used to unlock your validator |
+
+#### Teku
+
+| Variable | Type | Definition |
+|--|--|--|
+| `teku_api_port` | `int` | Teku HTTP API port |
+| `teku_api_target_port` | `int` | Teku HTTP API port target |
+| `teku_port` | `int` | Teku P2P port |
+| `teku_target_port` | `int` | Teku P2P port target | Teku P2P target port|
+| `teku_keystore_password` | `string` | Password used to unlock your validator |

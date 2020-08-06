@@ -9,10 +9,10 @@ spec:
   ports:
   - name: teku-api
     port: {{ teku_api_port }}
-    targetPort: {{ teku_api_port_target }}
+    targetPort: {{ teku_api_target_port }}
   - name: teku-p2p
     port: {{ teku_port }}
-    targetPort: {{ teku_port_target }}
+    targetPort: {{ teku_target_port }}
 
 ---
 

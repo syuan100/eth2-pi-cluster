@@ -1,0 +1,69 @@
+---
+# Deployments
+#############
+deploy_lighthouse_beacon: true
+deploy_lighthouse_validator: true
+deploy_teku_beacon_w_validator: true
+
+# Raspberry Pi setup
+####################
+
+ansible_user: ubuntu
+copy_local_key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
+sys_packages: [ 'curl', 'vim', 'git', 'ufw', 'socat' ]
+
+# Kubernetes setup
+##################
+
+k3s_version: v1.18.6+k3s1
+systemd_dir: /etc/systemd/system
+master_ip: "{{ hostvars[groups['master'][0]]['ansible_host'] | default(groups['master'][0]) }}"
+extra_k3s_server_args: ""
+
+# Replicated storage
+####################
+storage_solution: glusterfs # DO NOT CHANGE. May add other solutions in the future.
+
+# storage_path: local # uncomment for making creating replicated storage on the microSD card
+storage_path: /dev/sda1 # uncomment for device path where replicated storage will occur (recommended)
+storage_size: 50 # Please put a value in GB equal to or less than the amount of storage available on your device
+
+# Docker images
+###############
+geth_image_tag: syuan100/go-ethereum:1.9.16-arm64
+lighthouse_image_tag: syuan100/lighthouse:latest_arm64
+teku_image_tag: syuan100/teku:latest_arm64
+
+# Geth 
+######
+geth_json_rpc_port: 8545
+geth_json_rpc_port_target: 8545
+geth_port: 30303
+geth_port_target: 30303
+
+# Default endpoint: References geth instance in kubernetes cluster
+external_eth1: false
+eth1_endpoint: "http://geth.default.svc.cluster.local:{{ geth_json_rpc_port}}"
+
+# External endpoint: References geth instance in another service (such as Prysm or Infura). Uncomment the lines below to enable.
+# external_eth1: true
+# eth1_endpoint: https://rpc.goerli.mudit.blog/
+
+# Lighthouse
+############
+lighthouse_beacon_api_port: 5052
+lighthouse_beacon_api_port_target: 5052
+lighthouse_beacon_wss_port: 5053
+lighthouse_beacon_wss_port_target: 5053
+lighthouse_beacon_port: 9000
+lighthouse_beacon_port_target: 9000
+lighthouse_beacon_endpoint: "http://lighthouse-beacon.default.svc.cluster.local:{{ lighthouse_beacon_api_port }}"
+lighthouse_keystore_password: password_here
+
+# Teku
+############
+teku_api_port: 5051
+teku_api_target_port: 5051
+teku_port: 9000
+teku_target_port: 9000
+teku_keystore_password: password_here
