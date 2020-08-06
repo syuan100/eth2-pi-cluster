@@ -1,5 +1,5 @@
 - name: Copy lighthouse keys
-  file:
+  copy:
     src: ../eth2_launchpad_files/lighthouse/validator_keys
     dest: /mnt/eth2/.lighthouse
 

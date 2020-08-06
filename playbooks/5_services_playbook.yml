@@ -1,9 +1,8 @@
-- name: Redeploy all kubernetes services
+- name: Copy service configurations & deploy
   hosts: master
   any_errors_fatal: true
-  become: yes
+  become: true
   roles:
-    - role: services/remove-services
     - { role: services/glusterfs, when: storage_solution == "glusterfs" }
     - { role: services/geth, when: external_eth1 != true }
     - { role: services/lighthouse-beacon, when: deploy_lighthouse_beacon == true }

@@ -1,0 +1,9 @@
+- name: Delete all eth2 services
+  hosts: master
+  any_errors_fatal: true
+  become: yes
+  roles:
+    - role: services/remove-services
+
+- name: Redeploy services
+  import_playbook: ../services_playbook.yml

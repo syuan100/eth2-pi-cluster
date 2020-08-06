@@ -5,13 +5,6 @@
 - name: Update apt
   apt: name=aptitude update_cache=yes state=latest force_apt_get=yes
 
-# # SSH setup
-# - name: Set authorized key for default 'ubuntu' user
-#   authorized_key:
-#     user: "ubuntu"
-#     state: present
-#     key: "{{ copy_local_key }}"
-
 - name: Disable password authentication for root
   lineinfile:
     path: /etc/ssh/sshd_config

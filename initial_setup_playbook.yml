@@ -1,7 +1,7 @@
----
-- name: Initial system setup for all raspberry pis...
-  hosts: all
-  become: true
+- name: Host setup
+  hosts: k3s_cluster
+  become: yes
+  gather_facts: yes
   any_errors_fatal: true
   roles:
     - role: ubuntu
@@ -40,11 +40,21 @@
   become: yes
   any_errors_fatal: true
   tasks:
-    - name: Format storage
-      filesystem:
-        fstype: xfs
-        force: yes
-        dev: '{{ storage_path }}'
+    - name: Try formatting
+      block:
+        - name: Format storage
+          filesystem:
+            fstype: xfs
+            force: yes
+            dev: '{{ storage_path }}'
+      rescue:
+        - name: Remove volume from system manually
+          shell: lvremove -y vg_eth && vgremove vg_eth
+        - name: Format storage
+          filesystem:
+            fstype: xfs
+            force: yes
+            dev: '{{ storage_path }}'
 
 - name: Setting up glusterfs bricks...
   any_errors_fatal: true
@@ -78,11 +88,11 @@
 
     # Create thinpools
     gluster_infra_thinpools:
-      - {vgname: 'vg_eth', thinpoolname: 'eth2_thinpool', thinpoolsize: '50G', poolmetadatasize: '100M'}
+      - {vgname: 'vg_eth', thinpoolname: 'eth2_thinpool', thinpoolsize: '{{ storage_size }}G', poolmetadatasize: '100M'}
 
     # Create a thin volume
     gluster_infra_lv_logicalvols:
-      - { vgname: 'vg_eth', thinpool: 'eth2_thinpool', lvname: 'vg_eth_thin_eth2', lvsize: '200G'}
+      - { vgname: 'vg_eth', thinpool: 'eth2_thinpool', lvname: 'vg_eth_thin_eth2', lvsize: '{{ storage_size * ( groups["all"] | length ) }}G'}
 
     # Mount the devices 
     gluster_infra_mount_devices:
@@ -105,7 +115,7 @@
     gluster_cluster_bricks: '/mnt/brick1'
 
     # match number of replicas to total number of gluster_servers
-    gluster_cluster_replica_count: '{{ groups['gluster_servers'] | length }}'
+    gluster_cluster_replica_count: '{{ groups["gluster_servers"] | length }}'
 
     # variables to set specific volume options
     gluster_cluster_options: {'performance.cache-size':'64MB'}
@@ -142,7 +152,7 @@
     - name: Explicitly apply MetalLB config
       shell: kubectl apply -f /var/lib/rancher/k3s/server/manifests/metallb-config.yaml
 
-- name: Copy service configurations to k3s manifest directory
+- name: Copy service configurations & deploy
   hosts: master
   any_errors_fatal: true
   become: true
@@ -155,6 +165,3 @@
   tasks:
     - name: Redeploy services
       shell: kubectl rollout restart deployments
-
-
-

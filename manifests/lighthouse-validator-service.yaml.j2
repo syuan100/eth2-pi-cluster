@@ -30,7 +30,7 @@ spec:
             allowPrivilegeEscalation: false
           command: ["/bin/bash", "-c"]
           args:
-            - echo -e "{{ lighthouse_keystore_password }}" | lighthouse account validator import --directory validator_keys && \
+            - echo -e '\n' | lighthouse account validator import --directory validator_keys; \
               lighthouse validator --auto-register --server {{ lighthouse_beacon_endpoint }};
           volumeMounts:
             - mountPath: "/root"

@@ -1,0 +1,7 @@
+- name: Copy service configurations & deploy
+  hosts: gluster_servers
+  any_errors_fatal: true
+  become: true
+  tasks:
+    - name: Recreate missing directories
+      shell: mkdir -p /mnt/brick1/.glusterfs/indices; chmod -R 700 /mnt/brick1/.glusterfs
