@@ -202,44 +202,35 @@ If you've deployed successfully, SSH into your master node and run this command:
 You should see something like this:
 
 ```
-NAME                                        READY   STATUS    RESTARTS   AGE     IP            NODE     NOMINATED NODE   READINESS GATES
-pod/svclb-geth-4m6vk                        2/2     Running   0          4h9m    10.42.0.32    rpi-01   <none>           <none>
-pod/svclb-lighthouse-beacon-kdr5p           3/3     Running   0          4h9m    10.42.0.33    rpi-01   <none>           <none>
-pod/svclb-geth-udp-cr8ns                    1/1     Running   0          3h58m   10.42.0.34    rpi-01   <none>           <none>
-pod/svclb-lighthouse-beacon-udp-jbx5k       1/1     Running   0          3h58m   10.42.0.35    rpi-01   <none>           <none>
-pod/svclb-lighthouse-beacon-udp-7m7hx       1/1     Running   0          3h58m   10.42.1.177   rpi-02   <none>           <none>
-pod/svclb-geth-udp-hdh7v                    1/1     Running   0          3h58m   10.42.1.176   rpi-02   <none>           <none>
-pod/svclb-geth-mdszx                        2/2     Running   0          4h9m    10.42.1.172   rpi-02   <none>           <none>
-pod/svclb-lighthouse-beacon-ffrkv           3/3     Running   0          4h9m    10.42.1.173   rpi-02   <none>           <none>
-pod/svclb-lighthouse-beacon-4r8wm           3/3     Running   0          4h9m    10.42.2.189   rpi-03   <none>           <none>
-pod/svclb-geth-udp-w6h2j                    1/1     Running   0          3h58m   10.42.2.192   rpi-03   <none>           <none>
-pod/svclb-geth-2tn9x                        2/2     Running   0          4h9m    10.42.2.188   rpi-03   <none>           <none>
-pod/svclb-lighthouse-beacon-udp-659f4       1/1     Running   0          3h58m   10.42.2.193   rpi-03   <none>           <none>
-pod/lighthouse-validator-856c4df647-hlrnf   1/1     Running   0          3h32m   10.42.1.178   rpi-02   <none>           <none>
-pod/geth-6c88bff8d8-js7fp                   1/1     Running   0          3h32m   10.42.2.194   rpi-03   <none>           <none>
-pod/svclb-geth-udp-s2dtq                    1/1     Running   0          3h58m   10.42.3.244   rpi-04   <none>           <none>
-pod/svclb-geth-2wwb2                        2/2     Running   0          4h9m    10.42.3.239   rpi-04   <none>           <none>
-pod/svclb-lighthouse-beacon-twq22           3/3     Running   0          4h9m    10.42.3.240   rpi-04   <none>           <none>
-pod/svclb-lighthouse-beacon-udp-8dn5s       1/1     Running   0          3h58m   10.42.3.245   rpi-04   <none>           <none>
-pod/lighthouse-beacon-59b7c579ff-n7bwr      1/1     Running   0          3h25m   10.42.1.179   rpi-02   <none>           <none>
+NAME                                        READY   STATUS    RESTARTS   AGE
+pod/lighthouse-beacon-5cb8db45bf-pgrrb      1/1     Running   0          7m57s
+pod/teku-599c4d8cd7-5bnv5                   1/1     Running   0          7m56s
+pod/lighthouse-validator-689bf7d495-2zlsf   1/1     Running   0          7m53s
+pod/geth-7b8578699f-ppkz6                   1/1     Running   0          7m45s
 
-NAME                            TYPE           CLUSTER-IP      EXTERNAL-IP      PORT(S)                                        AGE     SELECTOR
-service/kubernetes              ClusterIP      10.43.0.1       <none>           443/TCP                                        7d7h    <none>
-service/lighthouse-beacon       LoadBalancer   10.43.205.225   192.168.xx.xxx   5052:30452/TCP,5053:32564/TCP,9000:30583/TCP   4h9m    app=lighthouse-beacon
-service/geth                    LoadBalancer   10.43.40.149    192.168.xx.xxx   8545:31424/TCP,30303:30263/TCP                 4h9m    app=geth
-service/geth-udp                LoadBalancer   10.43.88.38     192.168.xx.xxx   30303:30831/UDP                                3h58m   app=geth
-service/lighthouse-beacon-udp   LoadBalancer   10.43.133.3     <pending>        9000:31752/UDP                                 3h58m   app=lighthouse-beacon
+NAME                            TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)                                        AGE
+service/kubernetes              ClusterIP      10.43.0.1       <none>        443/TCP                                        10h
+service/lighthouse-beacon       LoadBalancer   10.43.41.161    <pending>     5052:30116/TCP,5053:31047/TCP,9000:31439/TCP   10h
+service/lighthouse-beacon-udp   LoadBalancer   10.43.145.90    <pending>     9000:30347/UDP                                 10h
+service/teku                    LoadBalancer   10.43.168.217   <pending>     5051:31876/TCP,9000:31345/TCP                  10h
+service/geth                    LoadBalancer   10.43.88.129    <pending>     8545:32676/TCP,30303:32454/TCP                 10h
+service/geth-udp                LoadBalancer   10.43.83.181    <pending>     30303:32065/UDP                                10h
 
-NAME                                         DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE     CONTAINERS                               IMAGES                                                                          SELECTOR
-daemonset.apps/svclb-geth-udp                4         4         4       4            4           <none>          3h58m   lb-port-30303                            rancher/klipper-lb:v0.1.2                                                       app=svclb-geth-udp
-daemonset.apps/svclb-geth                    4         4         4       4            4           <none>          4h9m    lb-port-8545,lb-port-30303               rancher/klipper-lb:v0.1.2,rancher/klipper-lb:v0.1.2                             app=svclb-geth
-daemonset.apps/svclb-lighthouse-beacon       4         4         4       4            4           <none>          4h9m    lb-port-5052,lb-port-5053,lb-port-9000   rancher/klipper-lb:v0.1.2,rancher/klipper-lb:v0.1.2,rancher/klipper-lb:v0.1.2   app=svclb-lighthouse-beacon
-daemonset.apps/svclb-lighthouse-beacon-udp   4         4         4       4            4           <none>          3h58m   lb-port-9000                             rancher/klipper-lb:v0.1.2                                                       app=svclb-lighthouse-beacon-udp
+NAME                                   READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/lighthouse-beacon      1/1     1            1           9h
+deployment.apps/teku                   1/1     1            1           9h
+deployment.apps/lighthouse-validator   1/1     1            1           9h
+deployment.apps/geth                   1/1     1            1           9h
 
-NAME                                   READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS             IMAGES                              SELECTOR
-deployment.apps/lighthouse-validator   1/1     1            1           20h   lighthouse-validator   syuan100/lighthouse:latest_arm64    app=lighthouse-validator
-deployment.apps/geth                   1/1     1            1           8h    geth                   syuan100/go-ethereum:1.9.16-arm64   app=geth
-deployment.apps/lighthouse-beacon      1/1     1            1           20h   lighthouse-beacon      syuan100/lighthouse:latest_arm64    app=lighthouse-beacon
+NAME                                              DESIRED   CURRENT   READY   AGE
+replicaset.apps/lighthouse-beacon-c59598f5d       0         0         0       10m
+replicaset.apps/teku-655894d7b                    0         0         0       10m
+replicaset.apps/geth-766cfb5ff8                   0         0         0       10m
+replicaset.apps/lighthouse-validator-94bf58978    0         0         0       10m
+replicaset.apps/lighthouse-beacon-5cb8db45bf      1         1         1       7m58s
+replicaset.apps/teku-599c4d8cd7                   1         1         1       7m56s
+replicaset.apps/lighthouse-validator-689bf7d495   1         1         1       7m53s
+replicaset.apps/geth-7b8578699f                   1         1         1       7m45s
 ```
 
 It's normal that some containers may crash and restart at the beginning of the deployment. Give it a few minutes to properly deploy.
