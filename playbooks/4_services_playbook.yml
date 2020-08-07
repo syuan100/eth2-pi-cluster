@@ -3,6 +3,7 @@
   any_errors_fatal: true
   become: true
   roles:
+    - role: services/metallb
     - { role: services/glusterfs, when: storage_solution == "glusterfs" }
     - { role: services/geth, when: external_eth1 != true }
     - { role: services/lighthouse-beacon, when: deploy_lighthouse_beacon == true }

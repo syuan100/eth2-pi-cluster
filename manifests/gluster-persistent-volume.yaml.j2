@@ -1,24 +1,29 @@
+kind: StorageClass
+metadata:
+  name: local-storage
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: eth2pv
 spec:
+  storageClassName: local-storage
   capacity:
     storage: {{ storage_size }}Gi
   accessModes:
-    - ReadWriteOnce
-  glusterfs:
-    endpoints: gluster-cluster
-    path: /eth2vol
-    readOnly: false
-  persistenVolumeReclaimPolicy: Retain
+    - ReadWriteMany
+  hostPath:
+    path: /mnt/eth2
+  persistentVolumeReclaimPolicy: Retain
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: eth2claim
 spec:
-  storageClassName: manual
+  storageClassName: local-storage
   accessModes:
     - ReadWriteMany
   resources:

@@ -20,7 +20,7 @@
 | `k3s_version` | `string` | k3s version to install |
 | `systemd_dir` | `string` | Path to systemd directory |
 | `master_ip` | `string` | Valid IP address for master host (Automatically pulled from hosts.ini file) |
-| `extra_k3s_server_args` | `string` | Additional arguments for `k3s server` command |
+| `extra_k3s_server_args` | `string` | Additional arguments for `k3s server` command (Default is `--no-deploy servicelb` since we are using MetalLB as the load balancer) |
 
 #### Replicated Storage
 

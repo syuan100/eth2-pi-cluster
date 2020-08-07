@@ -28,9 +28,11 @@
   package:
     name: thin-provisioning-tools
     state: present
+  register: apt_status
   when: ansible_distribution == "Debian" or ansible_distribution == "Ubuntu"
-  retries: 10
-  delay: 5
+  until: apt_status is success
+  retries: 100
+  delay: 10
 
 - name: Change to Install lvm tools for RHEL systems.
   package:

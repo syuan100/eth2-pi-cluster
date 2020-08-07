@@ -6,6 +6,16 @@
   roles:
     - role: ubuntu
 
+- name: Disable updates temporarily
+  hosts: k3s_cluster
+  become: yes
+  any_errors_fatal: true
+  tasks:
+    - shell: systemctl disable apt-daily.service && \
+             systemctl disable apt-daily.timer && \
+             systemctl disable apt-daily-upgrade.timer && \
+             systemctl disable apt-daily-upgrade.service
+
 - name: Setup K3s...
   hosts: k3s_cluster
   any_errors_fatal: true
@@ -133,30 +143,12 @@
         opts: defaults,_netdev
         state: mounted
 
-- name: Install MetalLB as default LoadBalancer
-  hosts: master
-  any_errors_fatal: true
-  become: true
-  tasks:
-    - name: Install MetalLB from kubectl
-      shell: kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/namespace.yaml && \
-             kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/metallb.yaml && \
-             kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
-    - name: Copy MetalLB config to server
-      template:
-        src: ../manifests/metallb-config.yaml.j2
-        dest: /var/lib/rancher/k3s/server/manifests/metallb-config.yaml
-        owner: root
-        group: root
-        mode: preserve
-    - name: Explicitly apply MetalLB config
-      shell: kubectl apply -f /var/lib/rancher/k3s/server/manifests/metallb-config.yaml
-
 - name: Copy service configurations & deploy
   hosts: master
   any_errors_fatal: true
   become: true
   roles:
+    - role: services/metallb
     - { role: services/glusterfs, when: storage_solution == "glusterfs" }
     - { role: services/geth, when: external_eth1 != true }
     - { role: services/lighthouse-beacon, when: deploy_lighthouse_beacon == true }
@@ -165,3 +157,13 @@
   tasks:
     - name: Redeploy services
       shell: kubectl rollout restart deployments
+
+- name: Re-enable updates
+  hosts: k3s_cluster
+  become: yes
+  any_errors_fatal: true
+  tasks:
+    - shell: systemctl enable apt-daily.service && \
+             systemctl enable apt-daily.timer && \
+             systemctl enable apt-daily-upgrade.timer && \
+             systemctl enable apt-daily-upgrade.service

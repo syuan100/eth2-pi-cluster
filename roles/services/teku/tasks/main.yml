@@ -1,6 +1,6 @@
 - name: Copy teku manifest file (beacon + validator)
   template:
-    src: ../manifests/teku-service.yaml.j2
+    src: ../../../../manifests/teku-service.yaml.j2
     dest: /var/lib/rancher/k3s/server/manifests/teku-service.yaml
 
 - name: Check for keystore files locally
@@ -17,15 +17,20 @@
 
 - name: Copy teku keystore files to master node
   copy:
-    src: ../eth2_launchpad_files/teku/validator_keys
+    src: ../../../../eth2_launchpad_files/teku/validator_keys
     dest: /mnt/eth2/teku
   when: teku_keystore_local.matched > 0
   retries: 3
   delay: 5
 
+- name: Create secrets folder for password files
+  file:
+    path: /mnt/eth2/teku/secrets
+    state: directory
+
 - name: Create password files for each validator key
   template:
-    src: ../manifests/teku-keystore-password.txt.j2
+    src: ../../../../manifests/teku-keystore-password.txt.j2
     dest: /mnt/eth2/teku/secrets/secret_{{ item }}.txt
   loop: "{{ range(1, +(teku_keystore_local.matched) + 1, 1)|list }}"
   retries: 3
@@ -45,7 +50,7 @@
 
 - name: Copy teku config file
   template:
-    src: ../manifests/teku-config.yml.j2
+    src: ../../../../manifests/teku-config.yml.j2
     dest: /mnt/eth2/teku/teku-config.yml
     owner: root
     group: root

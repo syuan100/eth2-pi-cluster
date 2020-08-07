@@ -1,7 +1,9 @@
-- name: Copy service configurations & deploy
-  hosts: gluster_servers
+- name: Re-enable updates
+  hosts: k3s_cluster
+  become: yes
   any_errors_fatal: true
-  become: true
   tasks:
-    - name: Recreate missing directories
-      shell: mkdir -p /mnt/brick1/.glusterfs/indices; chmod -R 700 /mnt/brick1/.glusterfs
+    - shell: systemctl enable apt-daily.service && \
+             systemctl enable apt-daily.timer && \
+             systemctl enable apt-daily-upgrade.timer && \
+             systemctl enable apt-daily-upgrade.service
