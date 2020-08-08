@@ -4,6 +4,7 @@
           kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
   register: result
   failed_when: result.rc != 0 and 'AlreadyExists' not in result.stderr
+
 - name: Copy MetalLB config to server
   template:
     src: ../../../../manifests/metallb-config.yaml.j2
@@ -11,5 +12,8 @@
     owner: root
     group: root
     mode: preserve
-- name: Explicitly apply MetalLB config
+  register: result
+
+- name: Restart if config changed
   shell: kubectl apply -f /var/lib/rancher/k3s/server/manifests/metallb-config.yaml
+  when: result.changed == true

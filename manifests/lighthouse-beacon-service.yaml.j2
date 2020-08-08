@@ -10,12 +10,15 @@ spec:
   - name: lighthouse-beacon-api
     port: {{ lighthouse_beacon_api_port }}
     targetPort: {{ lighthouse_beacon_api_port_target }}
+    nodePort: 30021
   - name: lighthouse-beacon-wss
     port: {{ lighthouse_beacon_wss_port }}
     targetPort: {{ lighthouse_beacon_wss_port_target }}
+    nodePort: 30023
   - name: lighthouse-beacon-port
     port: {{ lighthouse_beacon_port }}
     targetPort: {{ lighthouse_beacon_port_target }}
+    nodePort: 30022
 
 ---
 
@@ -32,6 +35,7 @@ spec:
     protocol: UDP
     port: {{ lighthouse_beacon_port }}
     targetPort: {{ lighthouse_beacon_port_target }}
+    nodePort: 30024
 
 ---
 

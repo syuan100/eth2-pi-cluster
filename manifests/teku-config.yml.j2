@@ -3,7 +3,7 @@ network: "medalla"
 
 # p2p
 p2p-enabled: true
-p2p-port: 9000
+p2p-port: {{ teku_port }}
 
 # validators
 validators-key-files: {{ teku_keystore_files_string }}
@@ -13,6 +13,6 @@ validators-key-password-files: {{ teku_keystore_secrets_string }}
 eth1-endpoint: {{ eth1_endpoint }}
 
 # beacon rest api
-rest-api-port: 5051
+rest-api-port: {{ teku_api_port }}
 rest-api-docs-enabled: true
 rest-api-enabled: true

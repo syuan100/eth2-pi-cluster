@@ -1,0 +1,17 @@
+- name: Copy nimbus keys
+  copy:
+    src: ../../../../eth2_launchpad_files/nimbus/validator_keys
+    dest: /mnt/eth2/shared_medalla_0
+
+- name: Copy nimbus validator service config
+  template:
+    src: ../../../../manifests/nimbus-service.yaml.j2
+    dest: /var/lib/rancher/k3s/server/manifests/nimbus-service.yaml
+    owner: root
+    group: root
+    mode: preserve
+  register: result
+
+- name: Restart if service changed
+  shell: kubectl rollout restart deployment/nimbus
+  when: result.changed == true

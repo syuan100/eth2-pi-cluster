@@ -10,9 +10,11 @@ spec:
   - name: geth-json-rpc-tcp
     port: {{ geth_json_rpc_port }}
     targetPort: {{ geth_json_rpc_port_target }}
+    nodePort: 30011
   - name: geth-tcp
     port: {{ geth_port }}
     targetPort: {{ geth_port_target }}
+    nodePort: 30012
 
 ---
 
@@ -29,6 +31,7 @@ spec:
     protocol: UDP
     port: {{ geth_port }}
     targetPort: {{ geth_port_target }}
+    nodePort: 30013
 
 ---
 

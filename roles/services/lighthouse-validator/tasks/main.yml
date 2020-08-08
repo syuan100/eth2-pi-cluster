@@ -10,3 +10,8 @@
     owner: root
     group: root
     mode: preserve
+  register: result
+
+- name: Restart if service changed
+  shell: kubectl rollout restart deployment/lighthouse-validator
+  when: result.changed == true

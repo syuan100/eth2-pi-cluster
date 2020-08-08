@@ -10,9 +10,11 @@ spec:
   - name: teku-api
     port: {{ teku_api_port }}
     targetPort: {{ teku_api_target_port }}
+    nodePort: 30031
   - name: teku-p2p
     port: {{ teku_port }}
     targetPort: {{ teku_target_port }}
+    nodePort: 30032
 
 ---
 

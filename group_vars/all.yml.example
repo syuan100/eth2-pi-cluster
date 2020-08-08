@@ -64,6 +64,6 @@ lighthouse_keystore_password: password_here
 ############
 teku_api_port: 5051
 teku_api_target_port: 5051
-teku_port: 9000
-teku_target_port: 9000
+teku_port: 9001
+teku_target_port: 9001
 teku_keystore_password: password_here
