@@ -1,0 +1,28 @@
+- name: Copy prysm keys
+  copy:
+    src: ../../../../eth2_launchpad_files/prysm/validator_keys
+    dest: /mnt/eth2/prysm
+
+- name: Create secrets folder for password files
+  file:
+    path: /mnt/eth2/prysm/secrets
+    state: directory
+
+- name: Create password file
+  template:
+    src: ../../../../manifests/prysm-keystore-password.txt.j2
+    dest: /mnt/eth2/prysm/secrets/prysm-keystore-password.txt
+
+- name: Copy prysm validator service config
+  template:
+    src: ../../../../manifests/prysm-validator-service.yaml.j2
+    dest: /var/lib/rancher/k3s/server/manifests/prysm-validator-service.yaml
+    owner: root
+    group: root
+    mode: preserve
+  register: result
+
+- name: Restart if service changed
+  shell: kubectl rollout restart deployment/prysm-validator
+  when: result.changed == true
+  ignore_errors: true

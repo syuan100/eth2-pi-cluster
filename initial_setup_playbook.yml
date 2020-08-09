@@ -155,6 +155,8 @@
     - { role: services/lighthouse-validator, when: deploy_lighthouse_validator == true }
     - { role: services/teku, when: deploy_teku_beacon_w_validator == true }
     - { role: services/nimbus, when: deploy_nimbus_beacon_w_validator == true }
+    - { role: services/prysm-beacon, when: deploy_prysm_beacon == true }
+    - { role: services/prysm-validator, when: deploy_prysm_validator == true }
   tasks:
     - name: Redeploy services
       shell: kubectl rollout restart deployments

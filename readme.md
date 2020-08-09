@@ -13,7 +13,7 @@ The purpose of this project is to provide a (relatively) easy way to deploy a fa
   - [x] Lighthouse
   - [ ] Prysm
   - [x] Teku
-  - [ ] Nimbux
+  - [x] Nimbus
   - [ ] Lodestar (?)
 - Logging and monitoring
 - Including a setting for POAP [`graffiti`](https://beaconcha.in/poap)

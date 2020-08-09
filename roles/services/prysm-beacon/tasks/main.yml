@@ -1,0 +1,13 @@
+- name: Copy prysm beacon service config
+  template:
+    src: ../../../../manifests/prysm-beacon-service.yaml.j2
+    dest: /var/lib/rancher/k3s/server/manifests/prysm-beacon-service.yaml
+    owner: root
+    group: root
+    mode: preserve
+  register: result
+
+- name: Restart if service changed
+  shell: kubectl rollout restart deployment/prysm-beacon
+  when: result.changed == true
+  ignore_errors: true

@@ -15,3 +15,4 @@
 - name: Restart if service changed
   shell: kubectl rollout restart deployment/nimbus
   when: result.changed == true
+  ignore_errors: true
