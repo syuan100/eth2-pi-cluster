@@ -8,6 +8,14 @@ deploy_nimbus_beacon_w_validator: true
 deploy_prysm_beacon: true
 deploy_prysm_validator: true
 
+# POAP graffiti
+###############
+# Get your POAP graffiti here: https://beaconcha.in/poap
+poap_lighthouse: paste_poap_graffiti_here
+poap_teku: paste_poap_graffiti_here
+poap_nimbus: paste_poap_graffiti_here
+poap_prysm: paste_poap_graffiti_here
+
 # Raspberry Pi setup
 ####################
 
