@@ -58,10 +58,6 @@ spec:
       labels:
         app: lighthouse-beacon
     spec:
-      volumes:
-        - name: eth2pv
-          persistentVolumeClaim:
-            claimName: eth2claim
       containers:
         - name: lighthouse-beacon
           image: {{ lighthouse_image_tag }}
@@ -77,9 +73,6 @@ spec:
               protocol: UDP
           command: ["lighthouse"]
           args: ["beacon", "--http", "--http-address", "0.0.0.0", "--http-allow-origin", "\"*\"", "--network-dir", "/root/.lighthouse/network", "--ws", "--ws-address", "0.0.0.0" ]
-          volumeMounts:
-            - mountPath: "/root"
-              name: eth2pv
 #          lifecycle:
 #            preStop:
 #              exec: 

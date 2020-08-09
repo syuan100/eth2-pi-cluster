@@ -42,7 +42,7 @@ metadata:
   labels:
     app: prysm-beacon
 spec:
-  replicas: 1
+  replicas: 2
   revisionHistoryLimit: 1
   strategy:
     type: Recreate
@@ -54,10 +54,6 @@ spec:
       labels:
         app: prysm-beacon
     spec:
-      volumes:
-        - name: eth2pv
-          persistentVolumeClaim:
-            claimName: eth2claim
       containers:
         - name: prysm-beacon
           image: {{ prysm_beacon_image_tag }}
@@ -72,6 +68,3 @@ spec:
               protocol: UDP
           command: ["./prysm-beacon"]
           args: [ "--datadir=/root/prysm/data", "--rpc-host=0.0.0.0", "--monitoring-host=0.0.0.0", "--http-web3provider", "{{ eth1_endpoint }}" ]
-          volumeMounts:
-            - mountPath: "/root"
-              name: eth2pv

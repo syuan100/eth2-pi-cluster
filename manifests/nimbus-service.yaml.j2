@@ -70,7 +70,7 @@ spec:
             - containerPort: {{ nimbus_port }}
             - containerPort: {{ nimbus_port }}
               protocol: UDP
-          command: ["bash", "-c", "yes '{{ nimbus_keystore_password }}' | /usr/bin/beacon_node deposits import --data-dir=build/data/shared_medalla_0 /build/data/shared_medalla_0/validator_keys && /usr/bin/beacon_node --network=medalla --data-dir=build/data/shared_medalla_0 --web3-url='{{ eth1_endpoint }}' --tcp-port={{ nimbus_port }} --udp-port={{ nimbus_port }} --rpc --rpc-port={{ nimbus_api_port }}{% if poap_nimbus is defined %} --graffiti '{{ poap_nimbus }}'{% endif %}"]
+          command: ["bash", "-c", "yes '{{ nimbus_keystore_password }}' | /usr/bin/beacon_node deposits import --data-dir=/root /build/data/shared_medalla_0/validator_keys && /usr/bin/beacon_node --network=medalla --data-dir=/root --web3-url='{{ eth1_endpoint }}' --tcp-port={{ nimbus_port }} --udp-port={{ nimbus_port }} --rpc --rpc-port={{ nimbus_api_port }}{% if poap_nimbus is defined %} --graffiti '{{ poap_nimbus }}'{% endif %}"]
           volumeMounts:
             - mountPath: "/build/data"
               name: eth2pv
