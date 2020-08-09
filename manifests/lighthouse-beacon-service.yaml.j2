@@ -80,3 +80,7 @@ spec:
           volumeMounts:
             - mountPath: "/root"
               name: eth2pv
+          lifecycle:
+            preStop:
+              exec: 
+                command: [ "/bin/sh","-c","rm /root/.lighthouse/beacon/chain_db/LOCK && rm /root/.lighthouse/beacon/freezer_db/LOCK" ]

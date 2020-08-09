@@ -60,6 +60,10 @@
     teku_keystore_secrets_string: "{{ teku_keystore_secrets.files | json_query('[].path') | map('basename') | list | map('regex_replace', '^', '/home/teku/secrets/') | list | join(',') }}"
   register: result
 
+- name: Apply new service config if changed
+  shell: kubectl apply -f /var/lib/rancher/k3s/server/manifests/teku-service.yaml
+  when: result.changed == true
+
 - name: Restart if service changed
   shell: kubectl rollout restart deployment/teku
   when: result.changed == true

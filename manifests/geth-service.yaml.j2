@@ -75,4 +75,8 @@ spec:
           volumeMounts:
             - mountPath: "/root"
               name: eth2pv
+          lifecycle:
+            preStop:
+              exec:
+                command: ["/bin/sh","-c","rm /root/.ethereum/goerli/geth/chaindata/LOCK && rm /root/.ethereum/goerli/geth/chaindata/ancient/FLOCK" ] 
         
