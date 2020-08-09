@@ -4,6 +4,10 @@
 |--|--|--|
 | `deploy_lighthouse_beacon` | `boolean` (`true`/`false`) | Deploy a lighthouse beacon |
 | `deploy_lighthouse_validator` | `boolean` (`true`/`false`) | Deploy a lighthouse validator |
+| `deploy_teku_beacon_w_validator` | `boolean` (`true`/`false`) | Deploy a teku beacon + validator combo |
+| `deploy_nimbus_beacon_w_validator` | `boolean` (`true`/`false`) | Deploy a nimbus beacon + validator combo |
+| `deploy_prysm_beacon` | `boolean` (`true`/`false`) | Deploy a prysm beacon |
+| `deploy_prysm_validator` | `boolean` (`true`/`false`) | Deploy a prysm validator |
 
 #### Raspberry Pi Setup
 
@@ -28,7 +32,7 @@
 |--|--|--|
 | `storage_solution` | `string` | Storage solution to use (Currently only `glusterfs`) |
 | `storage_path` | `string` | Path to disk to use for replicated storage |
-|  `storage_size` | `int` | Amount in GB to use for each disk |
+| `storage_size` | `int` | Amount in GB to use for each disk |
 
 #### Docker images
 
@@ -37,6 +41,9 @@
 | `geth_image_tag` | `string` | Valid container tag/path for geth |
 | `lighthouse_image_tag` | `string` | Valid container tag/path for lighthouse |
 | `teku_image_tag` | `string` | Valid container tag/path for teku | 
+| `nimbus_image_tag` | `string` | Valid container tag/path for nimbus | 
+| `prysm_beacon_image_tag` | `string` | Valid container tag/path for prysm beacon | 
+| `prysm_validator_image_tag` | `string` | Valid container tag/path for prysm validator |
 
 *NOTE: Images must be built for arm64 architectures in order to deploy correctly*
 
@@ -71,5 +78,23 @@
 | `teku_api_port` | `int` | Teku HTTP API port |
 | `teku_api_target_port` | `int` | Teku HTTP API port target |
 | `teku_port` | `int` | Teku P2P port |
-| `teku_target_port` | `int` | Teku P2P port target | Teku P2P target port|
+| `teku_target_port` | `int` | Teku P2P port target |
 | `teku_keystore_password` | `string` | Password used to unlock your validator |
+
+| Variable | Type | Definition |
+|--|--|--|
+| `nimbus_api_port` | `int` | nimbus HTTP API port |
+| `nimbus_api_target_port` | `int` | nimbus HTTP API port target |
+| `nimbus_port` | `int` | nimbus P2P port |
+| `nimbus_target_port` | `int` | nimbus P2P port target |
+| `nimbus_keystore_password` | `string` | Password used to unlock your validator |
+
+| Variable | Type | Definition |
+|--|--|--|
+| `prysm_beacon_api_port` | `int` | prysm HTTP API port |
+| `prysm_beacon_api_target_port` | `int` | prysm HTTP API port target |
+| `prysm_beacon_peer_port` | `int` | prysm P2P port |
+| `prysm_beacon_peer_target_port` | `int` | prysm P2P port target |
+| `prysm_beacon_peer_port_2` | `int` | prysm P2P port UDP |
+| `prysm_beacon_peer_target_port` | `int` | prysm P2P port target |
+| `prysm_beacon_keystore_password` | `string` | Password used to unlock your validator |

@@ -4,13 +4,16 @@
 deploy_lighthouse_beacon: true
 deploy_lighthouse_validator: true
 deploy_teku_beacon_w_validator: true
+deploy_nimbus_beacon_w_validator: true
+deploy_prysm_beacon: true
+deploy_prysm_validator: true
 
 # Raspberry Pi setup
 ####################
 
 ansible_user: ubuntu
 copy_local_key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
-sys_packages: [ 'curl', 'vim', 'git', 'ufw', 'socat' ]
+sys_packages: [ 'curl', 'vim', 'git', 'ufw', 'socat', 'jq' ]
 
 # Kubernetes setup
 ##################
@@ -33,6 +36,9 @@ storage_size: 50 # Please put a value in GB equal to or less than the amount of 
 geth_image_tag: syuan100/go-ethereum:1.9.16-arm64
 lighthouse_image_tag: syuan100/lighthouse:latest_arm64
 teku_image_tag: syuan100/teku:latest_arm64
+nimbus_image_tag: syuan100/nimbus-beacon:latest_arm64
+prysm_beacon_image_tag: syuan100/prysm-beacon:latest_arm64
+prysm_validator_image_tag: syuan100/prysm-validator:latest_arm64
 
 # Geth 
 ######
@@ -61,9 +67,27 @@ lighthouse_beacon_endpoint: "http://lighthouse-beacon.default.svc.cluster.local:
 lighthouse_keystore_password: password_here
 
 # Teku
-############
+######
 teku_api_port: 5051
 teku_api_target_port: 5051
 teku_port: 9001
 teku_target_port: 9001
 teku_keystore_password: password_here
+
+# Nimbus
+########
+nimbus_api_port: 9002
+nimbus_api_target_port: 9002
+nimbus_port: 9190
+nimbus_target_port: 9190
+nimbus_keystore_password: password_here
+
+# Prysm
+prysm_beacon_api_port: 4000
+prysm_beacon_api_target_port: 4000
+prysm_beacon_peer_port: 13000
+prysm_beacon_peer_target_port: 13000
+prysm_beacon_peer_port_2: 12000
+prysm_beacon_peer_target_port_2: 12000
+prysm_beacon_endpoint: prysm-beacon.default.svc.cluster.local:{{ prysm_beacon_api_port }}
+prysm_keystore_password: password_here

@@ -6,4 +6,4 @@
     - role: services/remove-services
 
 - name: Redeploy services
-  import_playbook: ../services_playbook.yml
+  import_playbook: ../4_services_playbook.yml
