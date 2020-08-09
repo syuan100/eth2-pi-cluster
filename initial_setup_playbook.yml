@@ -158,8 +158,10 @@
     - { role: services/prysm-beacon, when: deploy_prysm_beacon == true }
     - { role: services/prysm-validator, when: deploy_prysm_validator == true }
   tasks:
-    - name: Redeploy services
-      shell: kubectl rollout restart deployments
+    - name: Restart k3s
+      systemd:
+        state: restarted
+        name: k3s
 
 - name: Re-enable updates
   hosts: k3s_cluster
