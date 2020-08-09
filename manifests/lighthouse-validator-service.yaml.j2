@@ -28,7 +28,7 @@ spec:
           securityContext:
             runAsUser: 0
             allowPrivilegeEscalation: false
-          command: ["/bin/bash", "-c", "yes '{{ lighthouse_keystore_password }}' | lighthouse account validator import --directory /root/.lighthouse/validator_keys --stdin-passwords && lighthouse validator --auto-register --server {{ lighthouse_beacon_endpoint }}"]
+          command: ["/bin/bash", "-c", "yes '{{ lighthouse_keystore_password }}' | lighthouse account validator import --directory /root/.lighthouse/validator_keys --stdin-passwords && lighthouse validator --auto-register --server {{ lighthouse_beacon_endpoint }}{% if poap_lighthouse is defined %} --graffiti='{{ poap_lighthouse }}'{% endif %}"]
           volumeMounts:
             - mountPath: "/root"
               name: eth2pv

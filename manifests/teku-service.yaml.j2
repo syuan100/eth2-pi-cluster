@@ -52,7 +52,7 @@ spec:
             - containerPort: {{ teku_api_port }}
             - containerPort: {{ teku_port }}
           command: ["/opt/teku/bin/teku"]
-          args: [ "--config-file=/home/teku/teku-config.yml", "--data-path", "/home/teku" ]
+          args: [ "--config-file=/home/teku/teku-config.yml", "--data-path", "/home/teku"{% if poap_teku is defined %}, "--validators-graffiti={{ poap_teku }}"{% endif %} ]
           volumeMounts:
             - mountPath: "/home"
               name: eth2pv
