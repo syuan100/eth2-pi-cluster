@@ -31,6 +31,17 @@
       pause:
         minutes: 5
 
+- name: Copy kubelet config files
+  hosts: k3s_cluster
+  any_errors_fatal: true
+  become: yes
+  tasks:
+    - name: Copy geth service config file
+      copy:
+        src: ./manifests/kubelet-config.yaml
+        dest: /home/ubuntu/kubelet-config.yaml
+      register: result
+
 - name: Setup kubernetes master node...
   hosts: master
   any_errors_fatal: true

@@ -71,7 +71,7 @@ spec:
             - containerPort: {{ geth_port }}
               protocol: UDP            
           command: ["geth"]
-          args: ["--goerli", "--http", "--http.addr", "0.0.0.0", "--http.vhosts=*"]
+          args: ["--goerli", "--http", "--http.addr", "0.0.0.0", "--http.vhosts=*", "--cache", "512"]
           volumeMounts:
             - mountPath: "/root"
               name: eth2pv

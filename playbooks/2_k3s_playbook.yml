@@ -1,17 +1,27 @@
-- name: Setup K3s...
+# - name: Setup K3s...
+#   hosts: k3s_cluster
+#   any_errors_fatal: true
+#   gather_facts: yes
+#   become: yes
+#   roles:
+#     - role: kubernetes/prereq
+#     - role: kubernetes/download
+#     - role: kubernetes/raspbian
+#     - role: kubernetes/ubuntu
+#   tasks:
+#     - name: Pause to wait for SSH to come back online...
+#       pause:
+#         minutes: 5
+
+- name: Copy kubelet config files
   hosts: k3s_cluster
   any_errors_fatal: true
-  gather_facts: yes
   become: yes
-  roles:
-    - role: kubernetes/prereq
-    - role: kubernetes/download
-    - role: kubernetes/raspbian
-    - role: kubernetes/ubuntu
   tasks:
-    - name: Pause to wait for SSH to come back online...
-      pause:
-        minutes: 5
+    - name: Copy geth service config file
+      copy:
+        src: ../manifests/kubelet-config.yaml
+        dest: /home/ubuntu/kubelet-config.yaml
 
 - name: Setup kubernetes master node...
   hosts: master

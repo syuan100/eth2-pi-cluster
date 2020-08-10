@@ -1,0 +1,8 @@
+apiVersion: kubelet.config.k8s.io/v1beta1
+kind: KubeletConfiguration
+evictionSoft:
+  memory.available:  "500Mi"
+evictionSoftGracePeriod:
+  memory.available: "1m"
+evictionHard:
+  memory.available:  "300Mi"
