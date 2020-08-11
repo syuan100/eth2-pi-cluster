@@ -1,6 +1,5 @@
 - name: Netdata monitoring
-  hosts: master
+  hosts: k3s_cluster
   any_errors_fatal: true
-  become: true
   roles:
-    - role: netdata
+    - { role: netdata, when: deploy_netdata_monitoring == true }
