@@ -4,5 +4,3 @@ evictionSoft:
   memory.available:  "500Mi"
 evictionSoftGracePeriod:
   memory.available: "1m"
-evictionHard:
-  memory.available:  "300Mi"

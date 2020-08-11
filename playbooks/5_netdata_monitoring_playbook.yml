@@ -1,0 +1,6 @@
+- name: Netdata monitoring
+  hosts: master
+  any_errors_fatal: true
+  become: true
+  roles:
+    - role: netdata

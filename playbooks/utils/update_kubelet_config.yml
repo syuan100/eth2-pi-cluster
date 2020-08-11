@@ -9,6 +9,20 @@
         dest: /home/ubuntu/kubelet-config.yaml
       register: result
 
+- name: Copy service configurations & deploy
+  hosts: master
+  any_errors_fatal: true
+  become: true
+  roles:
+    - role: kubernetes/k3s/master
+
+- name: Copy service configurations & deploy
+  hosts: nodes
+  any_errors_fatal: true
+  become: true
+  roles:
+    - role: kubernetes/k3s/node
+
 - name: Restart k3s on server
   hosts: master
   any_errors_fatal: true

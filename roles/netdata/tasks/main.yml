@@ -1,0 +1,15 @@
+# - name: Install helm package manager
+#   snap:
+#     name: helm
+#     classic: yes
+
+# - name: Sync kubeconfig vars
+#   shell: kubectl config view --raw >~/.kube/config
+
+# - name: Checkout netdata helm chart
+#   git:
+#     repo: https://github.com/netdata/helmchart.git
+#     dest: /home/ubuntu/netdata-helmchart
+
+- name: Install netdata
+  shell: helm uninstall netdata
