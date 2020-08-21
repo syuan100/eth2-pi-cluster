@@ -11,7 +11,7 @@ The purpose of this project is to provide a (relatively) easy way to deploy a fa
 #### Work in progress
 - Adding additional clients
   - [x] Lighthouse
-  - [ ] Prysm
+  - [x] Prysm
   - [x] Teku
   - [x] Nimbus
   - [ ] Lodestar (?)
