@@ -3,10 +3,10 @@
 #############
 deploy_lighthouse_beacon: true
 deploy_lighthouse_validator: true
-deploy_teku_beacon_w_validator: true
-deploy_nimbus_beacon_w_validator: true
-deploy_prysm_beacon: true
-deploy_prysm_validator: true
+deploy_teku_beacon_w_validator: false
+deploy_prysm_beacon: false
+deploy_prysm_validator: false
+deploy_nimbus: false
 deploy_netdata_monitoring: true
 
 standalone_geth: false

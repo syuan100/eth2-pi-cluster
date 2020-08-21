@@ -71,7 +71,7 @@ spec:
             - containerPort: {{ prysm_beacon_peer_port_2 }}
               protocol: UDP
           command: ["./prysm-beacon"]
-          args: [ "--datadir=/root/prysm/data", "--rpc-host=0.0.0.0", "--monitoring-host=0.0.0.0", {% if public_facing_ip is defined %}"--p2p-host-ip", "{{ public_facing_ip }}", {% endif %}"--http-web3provider", "{{ eth1_endpoint }}", "—-block-batch-limit=512", "--p2p-max-peers", "40", "--dev" ]
+          args: [ "--datadir=/root/prysm/data", "--rpc-host=0.0.0.0", "--monitoring-host=0.0.0.0", {% if public_facing_ip is defined %}"--p2p-host-ip", "{{ public_facing_ip }}", {% endif %}"--http-web3provider", "{{ eth1_endpoint }}" ]
           volumeMounts:	
             - mountPath: "/root"	
               name: eth2pv 
