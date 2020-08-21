@@ -17,8 +17,8 @@ The purpose of this project is to provide a (relatively) easy way to deploy a fa
   - [ ] Lodestar (?)
 - Logging and monitoring
   - Currently implemeted Netdata, will try Prometheus/Grafana next to include logs
-~~- Including a setting for POAP [`graffiti`](https://beaconcha.in/poap)~~
-~~- Restarting only deployments that change or update~~
+- ~~Including a setting for POAP [`graffiti`](https://beaconcha.in/poap)~~
+- ~~Restarting only deployments that change or update~~
 
 #### Potential improvements
 - Other distributed storage options other than GlusterFS
