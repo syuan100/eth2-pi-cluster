@@ -8,6 +8,7 @@
 | `deploy_nimbus_beacon_w_validator` | `boolean` (`true`/`false`) | Deploy a nimbus beacon + validator combo |
 | `deploy_prysm_beacon` | `boolean` (`true`/`false`) | Deploy a prysm beacon |
 | `deploy_prysm_validator` | `boolean` (`true`/`false`) | Deploy a prysm validator |
+| `deploy_netdata_monitoring` | `boolean` (`true`/`false`) | Deploy netdata to monitor node performance |
 
 #### Raspberry Pi Setup
 

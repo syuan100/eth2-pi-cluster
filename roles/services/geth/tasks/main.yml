@@ -10,7 +10,3 @@
 - name: Apply new service config if changed
   shell: kubectl apply -f /var/lib/rancher/k3s/server/manifests/geth-service.yaml
   when: result.changed == true
-
-- name: Restart if deployment if service changed
-  shell: kubectl rollout restart deployment/geth
-  when: result.changed == true

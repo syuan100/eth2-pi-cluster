@@ -2,13 +2,13 @@
   file:
     path: /var/lib/rancher/k3s/server/manifests/geth-service.yaml
     state: absent
-  when: external_eth1 == true
+  when: external_eth1 == true and standalone_geth != true
   retries: 3
   delay: 5
 
 - name: Delete geth deployment
   shell: kubectl delete deployment --selector=app=geth
-  when: external_eth1 == true
+  when: external_eth1 == true and standalone_geth != true
   retries: 3
   delay: 5
 
@@ -40,7 +40,7 @@
   retries: 3
   delay: 5
 
-- name: Delete lighthouse-validator service config file
+- name: Delete teku service config file
   file:
     path: /var/lib/rancher/k3s/server/manifests/teku-service.yaml
     state: absent
@@ -51,5 +51,47 @@
 - name: Delete teku-beacon-validator deployment
   shell: kubectl delete deployment --selector=app=teku
   when: deploy_teku_beacon_w_validator == false
+  retries: 3
+  delay: 5
+
+- name: Delete prysm-beacon service config file
+  file:
+    path: /var/lib/rancher/k3s/server/manifests/prysm-beacon-service.yaml
+    state: absent
+  when: deploy_prysm_beacon == false
+  retries: 3
+  delay: 5
+
+- name: Delete prysm-beacon deployment
+  shell: kubectl delete deployment --selector=app=prysm-beacon
+  when: deploy_prysm_beacon == false
+  retries: 3
+  delay: 5
+
+- name: Delete prysm-validator service config file
+  file:
+    path: /var/lib/rancher/k3s/server/manifests/prysm-validator-service.yaml
+    state: absent
+  when: deploy_prysm_validator == false
+  retries: 3
+  delay: 5
+
+- name: Delete prysm-validator deployment
+  shell: kubectl delete deployment --selector=app=prysm-validator
+  when: deploy_prysm_validator == false
+  retries: 3
+  delay: 5
+
+- name: Delete nimbus service config file
+  file:
+    path: /var/lib/rancher/k3s/server/manifests/nimbus-service.yaml
+    state: absent
+  when: deploy_nimbus == false
+  retries: 3
+  delay: 5
+
+- name: Delete nimbus deployment
+  shell: kubectl delete deployment --selector=app=nimbus
+  when: deploy_nimbus == false
   retries: 3
   delay: 5

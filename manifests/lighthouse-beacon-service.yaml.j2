@@ -46,7 +46,7 @@ metadata:
   labels:
     app: lighthouse-beacon
 spec:
-  replicas: 2
+  replicas: 1
   revisionHistoryLimit: 1
   strategy:
     type: Recreate
@@ -58,6 +58,10 @@ spec:
       labels:
         app: lighthouse-beacon
     spec:
+      volumes:	
+        - name: eth2pv	
+          persistentVolumeClaim:	
+            claimName: eth2claim
       containers:
         - name: lighthouse-beacon
           image: {{ lighthouse_image_tag }}
@@ -73,7 +77,10 @@ spec:
               protocol: UDP
           command: ["lighthouse"]
           args: ["beacon", "--http", "--http-address", "0.0.0.0", "--http-allow-origin", "\"*\"", "--network-dir", "/root/.lighthouse/network", "--ws", "--ws-address", "0.0.0.0", "--eth1", "--eth1-endpoint", "{{ eth1_endpoint }}"{% if poap_lighthouse is defined %}, "--graffiti={{ poap_lighthouse }}"{% endif %}  ]
-#          lifecycle:
-#            preStop:
-#              exec: 
-#                command: [ "/bin/sh","-c","rm /root/.lighthouse/beacon/chain_db/LOCK && rm /root/.lighthouse/beacon/freezer_db/LOCK" 
+          volumeMounts:	
+            - mountPath: "/root"	
+              name: eth2pv
+          lifecycle:
+            preStop:
+              exec: 
+                command: [ "/bin/sh","-c","rm /root/.lighthouse/beacon/chain_db/LOCK && rm /root/.lighthouse/beacon/freezer_db/LOCK" 

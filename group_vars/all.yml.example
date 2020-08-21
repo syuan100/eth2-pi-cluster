@@ -7,6 +7,10 @@ deploy_teku_beacon_w_validator: true
 deploy_nimbus_beacon_w_validator: true
 deploy_prysm_beacon: true
 deploy_prysm_validator: true
+deploy_netdata_monitoring: true
+
+standalone_geth: false
+# public_facing_ip: xxx.xxx.xxx.xxx
 
 # POAP graffiti
 ###############
@@ -21,7 +25,7 @@ poap_prysm: paste_poap_graffiti_here
 
 ansible_user: ubuntu
 copy_local_key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
-sys_packages: [ 'curl', 'vim', 'git', 'ufw', 'socat', 'jq' ]
+sys_packages: [ 'curl', 'vim', 'git', 'ufw', 'socat', 'jq', 'dphys-swapfile' ]
 
 # Kubernetes setup
 ##################
