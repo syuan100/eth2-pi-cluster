@@ -84,3 +84,11 @@ spec:
             preStop:
               exec: 
                 command: [ "/bin/sh","-c","rm /root/.lighthouse/beacon/chain_db/LOCK && rm /root/.lighthouse/beacon/freezer_db/LOCK" 
+      tolerations:
+        - key: node.kubernetes.io/not-ready
+          effect: NoExecute
+          tolerationSeconds: 20
+        - key: node.kubernetes.io/unreachable
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 20
