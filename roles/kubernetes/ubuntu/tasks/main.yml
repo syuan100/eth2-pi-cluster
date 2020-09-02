@@ -17,7 +17,16 @@
     regexp: '^((?!.*\bcgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory\b).*)$'
     line: '\1 cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory'
   when:
-    - ansible_distribution == 'Ubuntu'
+    - ansible_distribution == 'Ubuntu' and ansible_distribution_release != 'focal'
+
+- name: Enable cgroup via boot commandline if not already enabled (20.04)
+  lineinfile:
+    path: /boot/firmware/cmdline.txt
+    backrefs: yes
+    regexp: '^((?!.*\bcgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory\b).*)$'
+    line: '\1 cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory'
+  when:
+    - ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'focal'
 
 - name: Reboot to enable cgroups
   reboot:
